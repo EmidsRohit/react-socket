@@ -34,7 +34,7 @@ io.on("connection", (socket, token) => {
   if (interval) {
     clearInterval(interval);
   }
-  interval = setInterval(() => getApiAndEmit(socket), 5000);
+  interval = setInterval(() => getApiAndEmit(socket), 1000);
 
   socket.on("disconnect", () => {
     console.log("Client disconnected");

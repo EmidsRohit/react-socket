@@ -10,7 +10,7 @@ class App extends React.Component {
     constructor() {
         super()
         this.state = {
-            response: false,
+            notification: 0,
             endpoint: 'http://127.0.0.1:4001',
         }
     }
@@ -27,8 +27,7 @@ class App extends React.Component {
         this.socket.on('disconnect', this.onClientDisconnected.bind(this))
     }
     onMessageRecieved(msg) {
-        this.setState({ response: msg })
-        console.log(msg)
+        this.setState({ notification: msg })
     }
 
     onClientDisconnected() {
@@ -36,11 +35,10 @@ class App extends React.Component {
     }
 
     render() {
-        const { response } = this.state
-        console.log(response)
+        const { notification } = this.state
         return (
             <Provider store={configureStore}>
-                <Layout></Layout>
+                <Layout notification={notification}></Layout>
             </Provider>
         )
     }

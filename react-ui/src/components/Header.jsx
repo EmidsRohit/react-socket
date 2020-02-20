@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react'
-import { Navbar, Overlay, Popover } from 'react-bootstrap'
+import { Navbar, Overlay, Popover, Badge } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const CytelLogo = require('../assets/images/Cytel-Logo.png').default
 
-function Header() {
+function Header(props) {
     const [show, setShow] = useState(false)
     const [target, setTarget] = useState(null)
     const userIcon = useRef(null)
@@ -13,6 +13,7 @@ function Header() {
         setShow(!show)
         setTarget(event.target)
     }
+    const { notification } = props
 
     return (
         <Navbar bg="light" variant="light">
@@ -20,7 +21,12 @@ function Header() {
                 <img className="logo" src={CytelLogo} alt="Logo" />
             </Navbar.Brand>
             <Navbar.Collapse className="justify-content-end">
-                <FontAwesomeIcon className="user-icon fa-lg" icon="bell" />
+                <div>
+                    <FontAwesomeIcon className="user-icon fa-lg" icon="bell" />
+                    <Badge variant="danger" className="notification-budge">
+                        {notification}
+                    </Badge>
+                </div>
                 <div ref={userIcon}>
                     <FontAwesomeIcon
                         className="user-icon fa-lg"
